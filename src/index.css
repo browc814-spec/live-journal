@@ -171,6 +171,11 @@ button {
   transform-origin: 50% 70%;
 }
 
+.avatar-stack {
+  position: relative;
+  width: 100%;
+}
+
 .avatar-photo {
   display: block;
   width: 100%;
@@ -180,6 +185,14 @@ button {
   box-shadow: 0 16px 36px rgba(27, 42, 37, 0.14);
   user-select: none;
   background: #dfe8e4;
+}
+
+.accessory-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .pose-calm .avatar-figure {
@@ -230,9 +243,46 @@ button {
   text-align: center;
 }
 
-.studio-preview .studio-hero {
+.studio-hero-wrap {
   width: min(260px, 70vw);
   margin: 0 auto 0.75rem;
+}
+
+.studio-preview .studio-hero {
+  width: 100%;
+  margin: 0;
+}
+
+.studio-section {
+  margin: 0.85rem 0 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 400;
+}
+
+.slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.slider-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--accent);
+  min-height: 28px;
+}
+
+.slider-ends {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 .pack-grid {

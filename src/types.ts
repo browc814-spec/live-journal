@@ -81,11 +81,24 @@ export interface CustomGoal {
 
 export type Goal = WeightGoal | HabitGoal | CustomGoal
 
-/** Illustrated look packs matching the anime / soft-3D reference style */
-export type StylePack = 'cozy' | 'street' | 'sakura'
+export type BodyType = 'slim' | 'average' | 'athletic' | 'soft'
+export type TopItem = 'tee' | 'crop' | 'hoodie' | 'jacket' | 'sweater'
+export type BottomItem = 'jeans' | 'skirt' | 'joggers' | 'shorts' | 'pants'
+export type ShoeItem = 'sneakers' | 'boots' | 'flats' | 'sandals'
+export type UnderItem = 'everyday' | 'sport' | 'sleep'
+export type AccessoryItem = 'none' | 'necklace' | 'earrings' | 'both' | 'belt'
 
 export interface AvatarLook {
-  stylePack: StylePack
+  /** 0–100, maps to height scale */
+  height: number
+  /** 0–100, maps to width / weight scale */
+  weight: number
+  bodyType: BodyType
+  top: TopItem
+  bottom: BottomItem
+  shoes: ShoeItem
+  under: UnderItem
+  accessory: AccessoryItem
 }
 
 export interface AppState {

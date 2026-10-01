@@ -171,56 +171,27 @@ button {
   transform-origin: 50% 70%;
 }
 
-.avatar-svg {
+.avatar-photo {
   display: block;
   width: 100%;
   height: auto;
-  overflow: visible;
-}
-
-.avatar-svg.layered {
-  background:
-    radial-gradient(120px 90px at 50% 28%, rgba(255, 250, 244, 0.9), transparent 70%),
-    linear-gradient(180deg, #e7efeb 0%, #d5e2dc 100%);
   border-radius: 28px;
-  box-shadow: 0 16px 36px rgba(27, 42, 37, 0.12);
-}
-
-.studio-preview .avatar-svg.layered {
-  position: relative;
-}
-
-.sweat {
-  fill: none;
-  stroke: #6aa8c2;
-  stroke-width: 3;
-  stroke-linecap: round;
-  opacity: 0;
-}
-
-.sparks {
-  opacity: 0;
+  object-fit: cover;
+  box-shadow: 0 16px 36px rgba(27, 42, 37, 0.14);
+  user-select: none;
+  background: #dfe8e4;
 }
 
 .pose-calm .avatar-figure {
   animation: breathe 4.2s ease-in-out infinite;
 }
 
-.pose-jittery .avatar-head {
+.pose-jittery .avatar-figure {
   animation: jitter 0.14s linear infinite;
-  transform-origin: 100px 70px;
-}
-
-.pose-jittery .sweat {
-  opacity: 1;
 }
 
 .pose-hungry .avatar-figure {
   animation: rumble 1.5s ease-in-out infinite;
-}
-
-.pose-hungry .blush {
-  opacity: 0.55;
 }
 
 .pose-energized .avatar-figure,
@@ -228,27 +199,16 @@ button {
   animation: bounce 1s ease-in-out infinite;
 }
 
-.pose-energized .sparks,
-.pose-proud .sparks {
-  opacity: 1;
-}
-
 .pose-encouraged .avatar-figure {
   animation: breathe 3.2s ease-in-out infinite;
 }
 
-.pose-encouraged .blush {
-  opacity: 0.65;
-}
-
-.pose-low .avatar-head {
+.pose-low .avatar-figure {
   animation: slump 3.8s ease-in-out infinite;
-  transform-origin: 100px 70px;
 }
 
-.pose-sleepy .avatar-head {
+.pose-sleepy .avatar-figure {
   animation: nod 2.8s ease-in-out infinite;
-  transform-origin: 100px 70px;
 }
 
 .studio-layout {
@@ -270,9 +230,49 @@ button {
   text-align: center;
 }
 
-.studio-preview .avatar-svg {
-  width: min(240px, 70vw);
+.studio-preview .studio-hero {
+  width: min(260px, 70vw);
   margin: 0 auto 0.75rem;
+}
+
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.pack-card {
+  display: grid;
+  gap: 0.4rem;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: var(--surface-solid);
+  border-radius: 16px;
+  padding: 0.55rem;
+  min-height: 0;
+}
+
+.pack-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #dfe8e4;
+}
+
+.pack-card strong {
+  font-size: 0.98rem;
+}
+
+.pack-card span {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.pack-card.active {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ink);
 }
 
 .studio-controls {

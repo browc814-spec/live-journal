@@ -1,6 +1,6 @@
 import type { AvatarLook, AvatarSnapshot } from './types'
 import { poseLabel } from './avatar'
-import { LayeredAvatar } from './LayeredAvatar'
+import { avatarArtSrc } from './avatarLook'
 
 export function AvatarStage({
   name,
@@ -31,7 +31,14 @@ export function AvatarStage({
       <div className="avatar-frame" aria-hidden="true">
         <div className="avatar-glow" />
         <div className="avatar-figure">
-          <LayeredAvatar look={look} pose={snapshot.pose} />
+          <img
+            className="avatar-photo"
+            src={avatarArtSrc(look, snapshot.pose)}
+            alt=""
+            width={480}
+            height={640}
+            draggable={false}
+          />
         </div>
       </div>
     </section>

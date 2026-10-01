@@ -81,24 +81,11 @@ export interface CustomGoal {
 
 export type Goal = WeightGoal | HabitGoal | CustomGoal
 
-export type BodyType = 'slim' | 'average' | 'broad'
-export type HairStyle = 'short' | 'wavy' | 'long' | 'bun' | 'bald'
-export type FacialHair = 'none' | 'stubble' | 'mustache' | 'beard'
-export type TopStyle = 'tee' | 'sweater' | 'hoodie' | 'tank'
-export type BottomStyle = 'jeans' | 'joggers' | 'shorts'
-export type TattooStyle = 'none' | 'armband' | 'forearm' | 'chest'
+/** Illustrated look packs matching the anime / soft-3D reference style */
+export type StylePack = 'cozy' | 'street' | 'sakura'
 
 export interface AvatarLook {
-  bodyType: BodyType
-  skinTone: string
-  hairStyle: HairStyle
-  hairColor: string
-  facialHair: FacialHair
-  topStyle: TopStyle
-  topColor: string
-  bottomStyle: BottomStyle
-  bottomColor: string
-  tattoo: TattooStyle
+  stylePack: StylePack
 }
 
 export interface AppState {

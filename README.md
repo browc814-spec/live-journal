@@ -1,6 +1,6 @@
 # Live Journal
 
-A small website avatar that reacts to what you actually log — food, drink, exercise, mood, meditations, journal pages, and goals.
+A small website avatar that reacts to what you actually log — food, drink, exercise, mood, meditations, journal pages, and goals. Customize looks in Avatar Studio (body, hair, clothes, tattoos).
 
 ## Local
 

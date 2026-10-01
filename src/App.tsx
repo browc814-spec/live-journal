@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AvatarStage } from './Avatar'
 import { deriveAvatar } from './avatar'
+import { StudioPanel } from './StudioPanel'
 import { createDefaultState, createId, loadState, nowISO, saveState } from './storage'
 import type {
   AppState,
+  AvatarLook,
   DailyLog,
   DrinkKind,
   ExerciseEffort,
@@ -12,7 +14,7 @@ import type {
   MoodLevel,
 } from './types'
 
-type Panel = 'log' | 'journal' | 'goals' | 'today'
+type Panel = 'log' | 'journal' | 'goals' | 'today' | 'studio'
 
 function formatWhen(iso: string) {
   const d = new Date(iso)
@@ -49,9 +51,15 @@ export default function App() {
     setPanel('today')
   }
 
+  const setLook = (avatarLook: AvatarLook) => setState((s) => ({ ...s, avatarLook }))
+
   return (
     <div className="app">
-      <AvatarStage name={state.avatarName} snapshot={snapshot} />
+      <AvatarStage
+        name={state.avatarName}
+        snapshot={snapshot}
+        look={state.avatarLook}
+      />
 
       <nav className="panels" aria-label="Journal sections">
         {(
@@ -60,6 +68,7 @@ export default function App() {
             ['today', 'Today'],
             ['journal', 'Journal'],
             ['goals', 'Goals'],
+            ['studio', 'Studio'],
           ] as const
         ).map(([id, label]) => (
           <button
@@ -105,10 +114,17 @@ export default function App() {
             }))
           }
         />
-      ) : (
+      ) : panel === 'goals' ? (
         <GoalsPanel
           goals={state.goals}
           onSave={(goals) => setState((s) => ({ ...s, goals }))}
+        />
+      ) : (
+        <StudioPanel
+          look={state.avatarLook}
+          name={state.avatarName}
+          onChangeLook={setLook}
+          onRename={(avatarName) => setState((s) => ({ ...s, avatarName }))}
         />
       )}
 

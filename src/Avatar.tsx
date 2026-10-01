@@ -1,23 +1,15 @@
-import type { AvatarPose, AvatarSnapshot } from './types'
+import type { AvatarLook, AvatarSnapshot } from './types'
 import { poseLabel } from './avatar'
-
-const POSE_ART: Record<AvatarPose, string> = {
-  calm: './avatar/juniper-calm.jpg',
-  jittery: './avatar/juniper-jittery.jpg',
-  hungry: './avatar/juniper-hungry.jpg',
-  energized: './avatar/juniper-energized.jpg',
-  encouraged: './avatar/juniper-proud.jpg',
-  low: './avatar/juniper-low.jpg',
-  sleepy: './avatar/juniper-sleepy.jpg',
-  proud: './avatar/juniper-proud.jpg',
-}
+import { LayeredAvatar } from './LayeredAvatar'
 
 export function AvatarStage({
   name,
   snapshot,
+  look,
 }: {
   name: string
   snapshot: AvatarSnapshot
+  look: AvatarLook
 }) {
   return (
     <section className={`avatar-stage pose-${snapshot.pose}`} aria-live="polite">
@@ -39,14 +31,7 @@ export function AvatarStage({
       <div className="avatar-frame" aria-hidden="true">
         <div className="avatar-glow" />
         <div className="avatar-figure">
-          <img
-            className="avatar-photo"
-            src={POSE_ART[snapshot.pose]}
-            alt=""
-            width={480}
-            height={640}
-            draggable={false}
-          />
+          <LayeredAvatar look={look} pose={snapshot.pose} />
         </div>
       </div>
     </section>

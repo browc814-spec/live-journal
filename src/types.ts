@@ -81,11 +81,32 @@ export interface CustomGoal {
 
 export type Goal = WeightGoal | HabitGoal | CustomGoal
 
+export type BodyType = 'slim' | 'average' | 'broad'
+export type HairStyle = 'short' | 'wavy' | 'long' | 'bun' | 'bald'
+export type FacialHair = 'none' | 'stubble' | 'mustache' | 'beard'
+export type TopStyle = 'tee' | 'sweater' | 'hoodie' | 'tank'
+export type BottomStyle = 'jeans' | 'joggers' | 'shorts'
+export type TattooStyle = 'none' | 'armband' | 'forearm' | 'chest'
+
+export interface AvatarLook {
+  bodyType: BodyType
+  skinTone: string
+  hairStyle: HairStyle
+  hairColor: string
+  facialHair: FacialHair
+  topStyle: TopStyle
+  topColor: string
+  bottomStyle: BottomStyle
+  bottomColor: string
+  tattoo: TattooStyle
+}
+
 export interface AppState {
   logs: DailyLog[]
   journal: JournalEntry[]
   goals: Goal[]
   avatarName: string
+  avatarLook: AvatarLook
 }
 
 export type AvatarPose =

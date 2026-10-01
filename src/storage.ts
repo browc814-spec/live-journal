@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid'
+import { createDefaultLook, migrateLook } from './avatarLook'
 import type { AppState, Goal, JournalEntry } from './types'
 
-export const STORAGE_KEY = 'live-journal-v1'
+export const STORAGE_KEY = 'live-journal-v2'
 
 export function createId() {
   return uuid()
@@ -15,13 +16,14 @@ export function createDefaultState(): AppState {
   const weightId = createId()
   return {
     avatarName: 'Juniper',
+    avatarLook: createDefaultLook(),
     logs: [],
     journal: [
       {
         id: createId(),
         createdAt: nowISO(),
         title: 'First page',
-        body: 'This is your live journal. Log the day, and Juniper will keep you honest — gently.',
+        body: 'This is your live journal. Log the day, and your avatar will keep you honest — gently.',
       },
     ],
     goals: [
@@ -39,7 +41,8 @@ export function createDefaultState(): AppState {
 
 export function loadState(): AppState {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw =
+      localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem('live-journal-v1')
     if (!raw) return createDefaultState()
     const parsed = JSON.parse(raw) as Partial<AppState>
     const base = createDefaultState()
@@ -48,6 +51,7 @@ export function loadState(): AppState {
         typeof parsed.avatarName === 'string' && parsed.avatarName.trim()
           ? parsed.avatarName.trim()
           : base.avatarName,
+      avatarLook: migrateLook(parsed.avatarLook),
       logs: Array.isArray(parsed.logs) ? (parsed.logs as AppState['logs']) : [],
       journal: Array.isArray(parsed.journal)
         ? (parsed.journal as JournalEntry[])

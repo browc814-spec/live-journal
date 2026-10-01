@@ -120,36 +120,22 @@ function isAcc(v: unknown): v is AccessoryItem {
 
 /** Map wardrobe choices onto the closest illustrated pack folder */
 export function resolvePack(look: AvatarLook): string {
-  // Under layer preferences nudge the outfit
+  // Distinct tops always win — Studio picks should feel immediate
+  if (look.top === 'tee') return 'tee'
+  if (look.top === 'crop') return 'crop'
+  if (look.top === 'hoodie') return 'hoodie'
+  if (look.top === 'jacket') return 'jacket'
+
+  // Sweater / neutral top: bottoms, shoes, and base layer nudge the look
   if (look.under === 'sport') return 'crop'
   if (look.under === 'sleep') return 'hoodie'
-
-  // Bottom-driven looks
   if (look.bottom === 'skirt') return 'skirt'
   if (look.bottom === 'joggers') return 'hoodie'
   if (look.bottom === 'shorts') return 'crop'
-
-  // Shoe-driven
   if (look.shoes === 'boots') return 'jacket'
-  if (look.shoes === 'flats' || look.shoes === 'sandals') {
-    return look.top === 'sweater' || look.top === 'tee' ? 'skirt' : look.top === 'hoodie' ? 'hoodie' : 'skirt'
-  }
+  if (look.shoes === 'flats' || look.shoes === 'sandals') return 'skirt'
 
-  // Top-driven defaults
-  switch (look.top) {
-    case 'tee':
-      return 'tee'
-    case 'crop':
-      return 'crop'
-    case 'hoodie':
-      return 'hoodie'
-    case 'jacket':
-      return 'jacket'
-    case 'sweater':
-      return 'cozy'
-    default:
-      return 'cozy'
-  }
+  return 'cozy'
 }
 
 export function poseArtFile(pose: AvatarPose): string {

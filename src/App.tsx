@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { AvatarStage } from './Avatar'
+import { AvatarStage, type AvatarBubble } from './Avatar'
 import { deriveAvatar } from './avatar'
+import { logSpeech } from './avatarInteract'
 import { StudioPanel } from './StudioPanel'
 import { createDefaultState, createId, loadState, nowISO, saveState } from './storage'
 import type {
@@ -33,6 +34,7 @@ function qualityLabel(q: FoodQuality) {
 export default function App() {
   const [state, setState] = useState<AppState>(() => loadState())
   const [panel, setPanel] = useState<Panel>('log')
+  const [bubble, setBubble] = useState<AvatarBubble | null>(null)
 
   useEffect(() => {
     saveState(state)
@@ -47,7 +49,13 @@ export default function App() {
   }, [state.logs])
 
   const addLog = (log: DailyLog) => {
-    setState((s) => ({ ...s, logs: [log, ...s.logs] }))
+    const next = { ...state, logs: [log, ...state.logs] }
+    const nextSnap = deriveAvatar(next)
+    setState(next)
+    setBubble({
+      text: logSpeech(log, nextSnap.pose, next.avatarName),
+      key: Date.now(),
+    })
     setPanel('today')
   }
 
@@ -59,6 +67,7 @@ export default function App() {
         name={state.avatarName}
         snapshot={snapshot}
         look={state.avatarLook}
+        bubble={bubble}
       />
 
       <nav className="panels" aria-label="Journal sections">

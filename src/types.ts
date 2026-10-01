@@ -82,11 +82,13 @@ export interface CustomGoal {
 export type Goal = WeightGoal | HabitGoal | CustomGoal
 
 export type BodyType = 'slim' | 'average' | 'athletic' | 'soft'
-export type TopItem = 'tee' | 'crop' | 'hoodie' | 'jacket' | 'sweater'
-export type BottomItem = 'jeans' | 'skirt' | 'joggers' | 'shorts' | 'pants'
-export type ShoeItem = 'sneakers' | 'boots' | 'flats' | 'sandals'
-export type UnderItem = 'everyday' | 'sport' | 'sleep'
-export type AccessoryItem = 'none' | 'necklace' | 'earrings' | 'both' | 'belt'
+export type OutfitLoadout =
+  | 'cozy'
+  | 'athletic'
+  | 'stylish'
+  | 'fancy'
+  | 'casual'
+  | 'undergarments'
 
 export interface AvatarLook {
   /** 0–100, maps to height scale */
@@ -94,11 +96,8 @@ export interface AvatarLook {
   /** 0–100, maps to width / weight scale */
   weight: number
   bodyType: BodyType
-  top: TopItem
-  bottom: BottomItem
-  shoes: ShoeItem
-  under: UnderItem
-  accessory: AccessoryItem
+  /** Preset outfit load-out */
+  loadout: OutfitLoadout
 }
 
 export interface AppState {

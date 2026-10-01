@@ -1,6 +1,5 @@
 import type { AvatarLook, AvatarSnapshot } from './types'
 import { poseLabel } from './avatar'
-import { AccessoryOverlay } from './AccessoryOverlay'
 import { avatarArtSrc, bodyTransform } from './avatarLook'
 
 export function AvatarStage({
@@ -42,7 +41,6 @@ export function AvatarStage({
               height={640}
               draggable={false}
             />
-            <AccessoryOverlay look={look} />
           </div>
         </div>
       </div>

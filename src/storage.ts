@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid'
 import { createDefaultLook, migrateLook } from './avatarLook'
 import type { AppState, Goal, JournalEntry } from './types'
 
-export const STORAGE_KEY = 'live-journal-v4'
+export const STORAGE_KEY = 'live-journal-v5'
 
 export function createId() {
   return uuid()
@@ -43,6 +43,7 @@ export function loadState(): AppState {
   try {
     const raw =
       localStorage.getItem(STORAGE_KEY) ??
+      localStorage.getItem('live-journal-v4') ??
       localStorage.getItem('live-journal-v3') ??
       localStorage.getItem('live-journal-v2') ??
       localStorage.getItem('live-journal-v1')

@@ -1,15 +1,11 @@
-import type { AvatarLook } from './types'
-import { AccessoryOverlay } from './AccessoryOverlay'
+import type { AvatarLook, OutfitLoadout } from './types'
 import {
-  ACCESSORIES,
   BODY_TYPES,
-  BOTTOMS,
-  SHOES,
-  TOPS,
-  UNDERS,
+  LOADOUTS,
   avatarArtSrc,
   bodyTransform,
   createDefaultLook,
+  loadoutThumbSrc,
 } from './avatarLook'
 
 function ChoiceRow<T extends string>({
@@ -97,8 +93,8 @@ export function StudioPanel({
         <div>
           <h2>Avatar Studio</h2>
           <p>
-            Shape the body with sliders, then dress them — tops, bottoms, shoes, base layer,
-            and accessories — in the same anime soft-3D style.
+            Shape the body with sliders, then pick a preset outfit load-out — same anime soft-3D
+            style, less fuss.
           </p>
         </div>
         <button
@@ -122,7 +118,6 @@ export function StudioPanel({
                 height={480}
                 draggable={false}
               />
-              <AccessoryOverlay look={look} />
             </div>
           </div>
           <p className="hint">Preview updates live. Mood poses still follow your logs.</p>
@@ -161,37 +156,21 @@ export function StudioPanel({
             onChange={(bodyType) => patch({ bodyType })}
           />
 
-          <h3 className="studio-section">Wardrobe</h3>
-          <ChoiceRow
-            label="Top"
-            value={look.top}
-            options={TOPS}
-            onChange={(top) => patch({ top })}
-          />
-          <ChoiceRow
-            label="Bottoms"
-            value={look.bottom}
-            options={BOTTOMS}
-            onChange={(bottom) => patch({ bottom })}
-          />
-          <ChoiceRow
-            label="Shoes"
-            value={look.shoes}
-            options={SHOES}
-            onChange={(shoes) => patch({ shoes })}
-          />
-          <ChoiceRow
-            label="Base layer"
-            value={look.under}
-            options={UNDERS}
-            onChange={(under) => patch({ under })}
-          />
-          <ChoiceRow
-            label="Accessories"
-            value={look.accessory}
-            options={ACCESSORIES}
-            onChange={(accessory) => patch({ accessory })}
-          />
+          <h3 className="studio-section">Outfit load-outs</h3>
+          <div className="pack-grid">
+            {LOADOUTS.map((pack) => (
+              <button
+                key={pack.id}
+                type="button"
+                className={`pack-card ${look.loadout === pack.id ? 'active' : ''}`}
+                onClick={() => patch({ loadout: pack.id as OutfitLoadout })}
+              >
+                <img src={loadoutThumbSrc(pack.id)} alt="" width={180} height={240} draggable={false} />
+                <strong>{pack.label}</strong>
+                <span>{pack.blurb}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

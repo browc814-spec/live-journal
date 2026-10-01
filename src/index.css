@@ -179,14 +179,15 @@ button {
 }
 
 .avatar-svg.layered {
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.55), rgba(223, 232, 228, 0.35));
+  background:
+    radial-gradient(120px 90px at 50% 28%, rgba(255, 250, 244, 0.9), transparent 70%),
+    linear-gradient(180deg, #e7efeb 0%, #d5e2dc 100%);
   border-radius: 28px;
   box-shadow: 0 16px 36px rgba(27, 42, 37, 0.12);
 }
 
-.blush {
-  fill: rgba(201, 107, 74, 0.22);
-  opacity: 0;
+.studio-preview .avatar-svg.layered {
+  position: relative;
 }
 
 .sweat {
@@ -264,8 +265,8 @@ button {
 }
 
 .studio-preview {
-  position: sticky;
-  top: 0.75rem;
+  position: relative;
+  top: auto;
   text-align: center;
 }
 
@@ -332,10 +333,10 @@ button {
 @keyframes breathe {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
   50% {
-    transform: translateY(-4px);
+    transform: translateY(-2px) scale(1.01);
   }
 }
 
